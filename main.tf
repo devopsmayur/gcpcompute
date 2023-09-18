@@ -22,18 +22,16 @@ data "terraform_remote_state" "my_network" {
   }
 }
 
-# Create a Compute Engine instance
-resource "google_compute_instance" "my_instance" {
-  name         = "my-instance"
-  machine_type = "n1-standard-1"
-  zone         = "us-central1-a"
-  allow_stopping_for_update = true
+resource "google_compute_instance" "vm_instance" {
+  name         = "terraform-instance"
+  machine_type = "f1-micro"
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-10"
+      image = "debian-cloud/debian-11"
     }
   }
+}
 
   network_interface {
     network = data.terraform_remote_state.my_network.outputs.network_self_link
