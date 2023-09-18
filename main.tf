@@ -36,11 +36,6 @@ resource "google_compute_instance" "my_instance" {
       image = "debian-cloud/debian-10"
     }
   }
-
-  network_interface {
-    network = data.terraform_remote_state.network.outputs.network_self_link
-    subnetwork = data.terraform_remote_state.network.outputs.subnet_self_link
-  }
 }
 
 # Output the instance public IP
