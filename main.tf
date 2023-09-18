@@ -12,7 +12,7 @@ provider "google" {
   region      = "us-central1"
 }
 # Reference the network from the Network Workspace
-data "terraform_remote_state" "network" {
+data "terraform_remote_state" "my_network" {
   backend = "remote"
   config = {
     organization = "hashicorp"
