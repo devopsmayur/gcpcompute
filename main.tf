@@ -12,7 +12,7 @@ provider "google" {
   region      = "us-central1"
 }
 # Reference the network from the Network Workspace
-data "terraform_remote_state" "my_network" {
+data "terraform_remote_state" "google_compute_network" {
   backend = "remote"
   config = {
     organization = "devopsmayur"
@@ -21,7 +21,6 @@ data "terraform_remote_state" "my_network" {
     }
   }
 }
-
 resource "google_compute_instance" "vm_instance" {
   name         = "terraform-instance"
   machine_type = "f1-micro"
@@ -31,10 +30,10 @@ resource "google_compute_instance" "vm_instance" {
       image = "debian-cloud/debian-11"
     }
   }
-}
 
   network_interface {
-    network = data.terraform_remote_state.my_network.outputs.network_self_link
+    network = data.terraform_remote_state.google_compute_network.vpc_network.name
+    access_config {
+    }
   }
 }
-
