@@ -11,16 +11,12 @@ provider "google" {
   project     = "hc-a0411e550991411898ee2ce2c2e"
   region      = "us-central1"
 }
-
 # Reference the network from the Network Workspace
-data "terraform_remote_state" "my_network" {
+data "terraform_remote_state" "network" {
   backend = "remote"
-
   config = {
-    organization = "hashicorp"
-    workspaces = {
-      name = "gcpnetwork"
-    }
+    organization = "devopsmayur"
+    workspace    = "ws-JMBTMjWy4VxUK7pH"
   }
 }
 
@@ -36,9 +32,15 @@ resource "google_compute_instance" "my_instance" {
       image = "debian-cloud/debian-10"
     }
   }
+
+  network_interface {
+    network = data.terraform_remote_state.network.outputs.network_self_link
+    subnetwork = data.terraform_remote_state.network.outputs.subnet_self_link
+  }
 }
 
 # Output the instance public IP
 output "instance_public_ip" {
   value = google_compute_instance.my_instance.network_interface.0.access_config.0.nat_ip
 }
+
