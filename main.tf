@@ -15,8 +15,10 @@ provider "google" {
 data "terraform_remote_state" "network" {
   backend = "remote"
   config = {
-    organization = "devopsmayur"
-    workspace    = "ws-JMBTMjWy4VxUK7pH"
+    organization = "hashicorp"
+    workspaces = {
+      name = "gcpnetwork"
+    }
   }
 }
 
