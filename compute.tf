@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  project = "hc-430e7eefb27e4cc18e75a35037a"
+  project = "hc-a0411e550991411898ee2ce2c2e"
   region  = "us-central1"
   zone    = "us-central1-c"
 }
