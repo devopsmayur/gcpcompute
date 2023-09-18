@@ -40,8 +40,3 @@ resource "google_compute_instance" "my_instance" {
   }
 }
 
-# Output the instance public IP
-output "instance_public_ip" {
-  value = google_compute_instance.my_instance.network_interface.0.access_config.0.nat_ip
-}
-
