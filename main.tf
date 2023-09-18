@@ -37,6 +37,7 @@ resource "google_compute_instance" "my_instance" {
 
   network_interface {
     network = data.terraform_remote_state.my_network.outputs.network_self_link
+    subnetwork = data.terraform_remote_state.my_network.outputs.subnet_self_link
   }
 }
 
