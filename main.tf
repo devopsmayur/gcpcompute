@@ -15,10 +15,6 @@ provider "google" {
 # Reference the network from the Network Workspace
 data "terraform_remote_state" "network" {
   backend = "remote"
-
-  config = {
-    workspace    = "gcpnetwork"
-  }
 }
 
 # Create a Compute Engine instance
