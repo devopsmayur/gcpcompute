@@ -23,3 +23,13 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 }
+data "terraform_remote_state" "vpc_network" {
+  backend = "remote"
+
+  config = {
+    organization = "hashicorp"
+    workspaces = {
+      name = "gcpnetwork"
+    }
+  }
+}
